@@ -30,8 +30,8 @@ function add_custom_jet_popup_conditions() {
 		);
 
 		foreach ( $conditions as $class => $file ) {
-				require $file;
-				$manager->register_condition( $class );
+			require $file;
+			$manager->register_condition( $class );
 		}
 
 	} );
