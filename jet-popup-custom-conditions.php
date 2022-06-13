@@ -2,7 +2,7 @@
 /**
  * Plugin Name: JetPopup - Custom conditions
  * Plugin URI:
- * Description:
+ * Description: Makes possible to add custom conditions to JetPopup. Contains "Url Contains" condition.
  * Version:     1.0.0
  * Author:      
  * Author URI:  
