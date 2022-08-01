@@ -29,7 +29,7 @@ if ( ! defined( 'WPINC' ) ) {
 		 * @return string
 		 */
 		public function get_label() {
-			return __( 'Url Contains', 'jet-popup' );
+			return __( 'URL Contains', 'jet-popup' );
 		}
 
 		/**
