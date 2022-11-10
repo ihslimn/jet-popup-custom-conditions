@@ -22,30 +22,22 @@ if ( ! class_exists( 'Jet_Popup_Custom_Conditions' ) ) {
 	class Jet_Popup_Custom_Conditions {
 
 		public function __construct() {
-			add_action( 'init', array( $this, 'add_custom_jet_popup_conditions' ), -10000 );
+			add_filter( 'jet-popup/conditions/conditions-list', array( $this, 'add_custom_jet_popup_conditions' ) );
 		}
 
-		public function add_custom_jet_popup_conditions() {
-			
-			add_action( 'jet-popup/conditions/register', function( $manager ) {
-				
-				$conditions_path = trailingslashit( plugin_dir_path( __FILE__ ) ) . 'conditions/';
+		public function add_custom_jet_popup_conditions( $conditions ) {
 
-				$conditions = array(
-					'Jet_Popup_Conditions_Advanced_Url_Contains' => $conditions_path . 'advanced-url-contains.php',
-				);
+			$conditions_path = trailingslashit( plugin_dir_path( __FILE__ ) ) . 'conditions/';
 
-				if ( function_exists( 'jet_engine' ) ) {
-					$conditions['Jet_Popup_Conditions_Advanced_Query_Has_Items']    = $conditions_path . 'query-has-items.php';
-					$conditions['Jet_Popup_Conditions_Advanced_Query_Has_No_Items'] = $conditions_path . 'query-has-no-items.php';
-				}
+			$custom_conditions = array(
+				'\Jet_Popup\Conditions\Jet_Popup_Conditions_Advanced_Url_Contains' => $conditions_path . 'advanced-url-contains.php',
+			);
 
-				foreach ( $conditions as $class => $file ) {
-					require $file;
-					$manager->register_condition( $class );
-				}
+			foreach( $custom_conditions as $class => $file ) {
+				$conditions[$class] = $file;
+			}
 
-			} );
+			return $conditions;
 
 		}
 
